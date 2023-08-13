@@ -8,27 +8,29 @@
 </head>
 <body>
   <div class="player-profile">
-    <section class="player-details">
-      <h1 class="player-name"><%= player.name %> Profile </h1>
-      <p class="player-nationality"><strong>Nationality:</strong> <img src="<%= player.nationalityImg %>" alt="<%= player.nationality %>"></p>
-      <p class="player-rating"><strong>Height:</strong> <%= player.height %></p>
-      <p class="player-rating"><strong>Weight:</strong> <%= player.weight %></p>
-      <p class="player-rating"><strong>Preferred Foot:</strong> <%= player.preferredFoot %></p>
-      <p class="player-rating"><strong>Birth Date:</strong> <%= player.birthDate %></p>
-      <p class="player-rating"><strong>Player Work Rate:</strong> <%= player.playerWorkRate %></p>
-      <p class="player-rating"><strong>Weak Foot:</strong> <%= player.weakFoot %> / 5</p>
-      <p class="player-rating"><strong>Skill Moves:</strong> <%= player.skillMoves %> / 5</p>
-      <p class="player-rating"><strong>Value:</strong> <%= player.valueEuro %></p>
-      <p class="player-rating"><strong>Wage:</strong> <%= player.wageEuro %></p>
-      <p class="player-rating"><strong>Overall Rating:</strong> <%= player.overallRating %></p>
-      <p class="player-rating"><strong>Potential Rating:</strong> <%= player.potentialRating %></p>
-      <p class="player-positions"><strong>Preferred Positions:</strong> <%= player.preferredPositions.join(', ') %></p>
-      <p class="player-age"><strong>Age:</strong> <%= player.age %></p>
-      <p class="player-team"><strong>Team:</strong> <img src="<%= player.teamImg %>" alt="<%= player.team %>"></p>
-    </section>
-    <aside>
-      <p class="player"><img src="<%= player.playerImg %>" alt="<%= player.name %>"></p>
-    </aside>
+    <div class="player-card">
+      <section class="player-details">
+        <h1 class="player-name"><%= player.name %> Profile </h1>
+        <p class="player-rating"><strong>Height:</strong> <%= player.height %></p>
+        <p class="player-rating"><strong>Weight:</strong> <%= player.weight %></p>
+        <p class="player-rating"><strong>Preferred Foot:</strong> <%= player.preferredFoot %></p>
+        <p class="player-rating"><strong>Birth Date:</strong> <%= player.birthDate %></p>
+        <p class="player-rating"><strong>Player Work Rate:</strong> <%= player.playerWorkRate %></p>
+        <p class="player-rating"><strong>Weak Foot:</strong> <%= player.weakFoot %> / 5</p>
+        <p class="player-rating"><strong>Skill Moves:</strong> <%= player.skillMoves %> / 5</p>
+        <p class="player-rating"><strong>Value:</strong> <%= player.valueEuro %></p>
+        <p class="player-rating"><strong>Wage:</strong> <%= player.wageEuro %></p>
+        <p class="player-rating"><strong>Overall Rating:</strong> <%= player.overallRating %></p>
+        <p class="player-rating"><strong>Potential Rating:</strong> <%= player.potentialRating %></p>
+        <p class="player-positions"><strong>Preferred Positions:</strong> <%= player.preferredPositions.join(', ') %></p>
+        <p class="player-age"><strong>Age:</strong> <%= player.age %></p>
+      </section>
+      <aside>
+          <img src="<%= player.playerImg %>" alt="<%= player.name %>">
+          <img src="<%= player.teamImg %>" alt="<%= player.team %>">
+          <img src="<%= player.nationalityImg %>" alt="<%= player.nationality %>"></p>  
+      </aside>
+      </div>
   </div>
   
 
