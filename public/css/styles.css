@@ -1,0 +1,241 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #353535;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+.size-1{
+  width: 40px;
+}
+.player-list .name a {
+  color: #bababa;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.player-list .name a:hover {
+  color: #e5e5e5;
+  text-decoration: none;
+}
+
+.topp-content, .main-content {
+  padding: 15px; 
+}
+.topp-content{
+  padding: 20px;
+  text-align: center;
+  background-color: #555454; 
+  border-bottom: 1px solid #222; 
+} 
+.main-content {
+  padding: 20px;
+  text-align: center;
+  background-color: #313131;  
+  border-bottom: 1px solid #222;  
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+.player-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.player-table th,
+.player-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.player-table td img{
+  width: 40px;
+}
+
+.player-table th {
+  background-color: #2f2f2f;
+  color: #c2c2c2;
+  font-weight: bold;
+}
+
+.player-table tr {
+  transition: background-color 0.3s ease;
+}
+
+.player-table tr:hover {
+  background-color: #575757;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;  
+  margin: 10px 0;  
+}
+
+.pagination-button {
+  padding: 12px 24px;  
+  margin: 10px; 
+  border: 2px solid #b8b8b8;
+  background-color: transparent;
+  color: #b8b8b8;
+  font-weight: bold;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.pagination-button.active {
+  background-color: #b1b1b1;
+  color: #3a3a3a;
+  border-color: #000000;
+}
+
+.pagination-button:hover,
+.pagination-button.active:hover {
+  background-color: #b1b1b1;
+  color: #3a3a3a;
+}
+
+.pagination-button:first-child {
+  margin-left: 0;
+}
+
+.pagination-button:last-child {
+  margin-right: 0;
+}
+
+.pagination-button.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.filter-input {
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 200px;
+  font-size: 14px;
+}
+
+#sort-button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #3a3a3a;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#sort-button:hover {
+  background-color: #b1b1b1;
+  color: #3a3a3a;
+}
+
+
+
+@media (min-width: 480px) and (max-width: 620px) {
+
+  .main-content .profile-container {
+    padding: 0px;
+    max-width: 100%;
+  }
+
+  .player-table th,
+  .player-table td {
+    padding: 4px;
+    font-size: 12px;
+  }
+
+  .filter-input {
+    padding: 8px;
+    font-size: 12px;
+    width: 150px;
+  }
+
+  #sort-button {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+
+  h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .pagination-button {
+    padding: 8px 16px;
+    margin: 8px;
+    font-size: 12px;
+  }
+
+  .player-table td img {
+    width: 30px;
+  }
+
+  .player-list .name a {
+    font-size: 12px;
+  }
+}
+
+
+
+
+@media (max-width: 480px) {
+
+  .main-content .profile-container {
+    padding: 0px;
+    max-width: 90%;
+  }
+
+  .player-table th,
+  .player-table td {
+    padding: 2px;
+    font-size: 12px;
+  }
+
+  .filter-input {
+    padding: 8px;
+    font-size: 12px;
+    width: 150px;
+  }
+
+  #sort-button {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+
+  h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .pagination-button {
+    padding: 8px 16px;
+    margin: 8px;
+    font-size: 12px;
+  }
+
+  .player-table td img {
+    width: 30px;
+  }
+
+  .player-list .name a {
+    font-size: 12px;
+  }
+}

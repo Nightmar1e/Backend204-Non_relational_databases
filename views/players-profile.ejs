@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Players' Profiles</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="topp-content">
+  <input type="text" id="filter-input" class="filter-input" placeholder="Filter players by name">
+  <input type="text" id="filter-nationality-input" class="filter-input" placeholder="Filter by nationality">
+  <input type="text" id="filter-position-input" class="filter-input" placeholder="Filter by position">
+  <input type="text" id="filter-team-input" class="filter-input" placeholder="Filter by team">
+  <button id="sort-button">Sort by Name (Asc)</button>
+  </div>
+  <div class="main-content">
+    <div class="profile-container">
+      <h1>All Players' Profiles</h1>
+      <table class="player-table">
+        <thead>
+          <tr>
+            <th class="name">Name</th>
+            <th class="nationnality">Nationality</th>
+            <th class="OverallRating">OVR</th>
+            <th class="PotentialRating">POT</th>
+            <th class="position">Preferred Positions</th>
+            <th class="age">Age</th>
+            <th class="team">Team</th>
+          </tr>
+        </thead>
+        <tbody class="player-list">
+          <% players.forEach(player => { %>
+            <tr class="player-details">
+              <td class="name">
+                <a href="/player/<%= player.playerId %>"><%= player.name %></a>
+              </td>
+              <td class="nationality"><img src="<%= player.nationalityImg %>" alt="<%= player.nationality %>"></td>
+              <td class="OverallRating"><%= player.overallRating %></td>
+              <td class="PotentialRating"><%= player.potentialRating %></td>
+              <td class="position"><%= player.preferredPositions.join(', ') %></td>
+              <td class="age"><%= player.age %></td>
+              <td class="team"><img src="<%= player.teamImg %>" alt="<%= player.team %>"></td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<div class="pagination">
+  <button id="prev-page">Previous Page</button>
+  <button id="next-page">Next Page</button>
+</div>
+
+  <script src="/js/myscript.js"></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #353535;
+}
+  
+.player-profile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #1d1d1d;
+    box-shadow: 0px 10px 5px rgba(0, 0, 0, 0.1); 
+    border-radius: 35px;
+}
+
+
+.player-details {
+    flex: 1;
+    padding: 20px;
+}
+
+aside {
+    flex: 1;
+    text-align: center;
+    padding: 20px;
+}
+h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #b7b7b7;
+}
+
+p {
+    margin: 10px 0;
+    line-height: 1.5;
+    color: #c7c6c6;
+}
+
+strong {
+    font-weight: bold;
+}
+
+
+.player-team img,
+.player-nationality img {
+    vertical-align: middle;
+    margin-right: 8px;
+    width: 28px;
+}
+
+
+.back-button {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: #555;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    box-shadow: 0px 10px 5px rgba(0, 0, 0, 0.1); 
+}
+
+.back-button:hover {
+    background-color: #333;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 10px 0;
+}
+
+@media (max-width: 480px) {
+    .player-profile {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .player-details,
+    aside {
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 24px; 
+        margin-bottom: 15px; 
+    }
+
+    p {
+        margin: 8px 0; 
+        font-size: 14px; 
+    }
+
+    .back-button {
+        padding: 6px 10px; 
+        font-size: 14px; 
+    }
+}
