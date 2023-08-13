@@ -22,6 +22,19 @@ const playerSchema = new mongoose.Schema({
   age: Number,
   team: String,
   teamImg: String,
+  height: String,
+  weight: String,
+  preferredFoot: String,
+  birthDate: String,
+  playerWorkRate: String,
+  weakFoot: Number,
+  skillMoves: Number,
+  valueEuro: String,
+  valueDollar: String,
+  valuePound: String,
+  wageEuro: String,
+  wageDollar: String,
+  wagePound: String,
 });
 
 const Player = mongoose.model("Player", playerSchema, "players"); 
@@ -49,6 +62,9 @@ async function scrapePlayersData(url, pagesLeft) {
         const team = $(this).find('img.team').attr('alt').replace(" FIFA 23", "");
         const teamImg = $(this).find('.link-team img').attr('src');
 
+        const playerDetailUrl = `https://www.fifaindex.com/player/${playerId}/${name.toLowerCase().replace(/\s/g, '-')}/fifa23/`;
+
+
         playersData.push({
           playerId,
           playerImg,
@@ -61,14 +77,58 @@ async function scrapePlayersData(url, pagesLeft) {
           age,
           team,
           teamImg,
+          playerDetailUrl,
         });
       }
     });
 
-    for (const playerInfo of playersData) {
-      const playerDocument = new Player(playerInfo);
-      await playerDocument.save();
+for (const playerInfo of playersData) {
+    const playerDocument = new Player(playerInfo);
+    await playerDocument.save();
+
+    try {
+        const detailResponse = await axios.get(playerInfo.playerDetailUrl);
+        const $detail = cheerio.load(detailResponse.data);
+
+        const height = $detail('p:contains("Height") .data-units-metric').text();
+        const weight = $detail('p:contains("Weight") .data-units-metric').text();
+        const preferredFoot = $detail('p:contains("Preferred Foot") .float-right').text();
+        const birthDate = $detail('p:contains("Birth Date") .float-right').text();
+        const age = parseInt($detail('p:contains("Age") .float-right').text(), 10);
+        const preferredPositions = $detail('p:contains("Preferred Positions") .badge.position').map((i, el) => $(el).text()).get();
+        const playerWorkRate = $detail('p:contains("Player Work Rate") .float-right').text();
+        const weakFoot = $detail('p:contains("Weak Foot") .star .fas.fa-star').length;
+        const skillMoves = $detail('p:contains("Skill Moves") .star .fas.fa-star').length;
+        const valueEuro = $detail('p.data-currency-euro:contains("Value") .float-right').text();
+        const valueDollar = $detail('p.data-currency-dollar:contains("Value") .float-right').text();
+        const valuePound = $detail('p.data-currency-pound:contains("Value") .float-right').text();
+        const wageEuro = $detail('p.data-currency-euro:contains("Wage") .float-right').text();
+        const wageDollar = $detail('p.data-currency-dollar:contains("Wage") .float-right').text();
+        const wagePound = $detail('p.data-currency-pound:contains("Wage") .float-right').text();
+
+        await Player.updateOne({ playerId: playerInfo.playerId }, {
+            $set: {
+                height,
+                weight,
+                preferredFoot,
+                birthDate,
+                age,
+                preferredPositions,
+                playerWorkRate,
+                weakFoot,
+                skillMoves,
+                valueEuro,
+                valueDollar,
+                valuePound,
+                wageEuro,
+                wageDollar,
+                wagePound,
+            }
+        });
+    } catch (error) {
+        console.error(`Error scraping player ${playerInfo.name}: ${error.message}`);
     }
+}
 
     const nextLink = $(".ml-auto a");
     if (pagesLeft > 1 && nextLink.length > 0) {

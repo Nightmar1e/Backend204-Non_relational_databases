@@ -9,8 +9,17 @@
 <body>
   <div class="player-profile">
     <section class="player-details">
-      <h1 class="player-name"><%= player.name %> Profile</h1>
+      <h1 class="player-name"><%= player.name %> Profile </h1>
       <p class="player-nationality"><strong>Nationality:</strong> <img src="<%= player.nationalityImg %>" alt="<%= player.nationality %>"></p>
+      <p class="player-rating"><strong>Height:</strong> <%= player.height %></p>
+      <p class="player-rating"><strong>Weight:</strong> <%= player.weight %></p>
+      <p class="player-rating"><strong>Preferred Foot:</strong> <%= player.preferredFoot %></p>
+      <p class="player-rating"><strong>Birth Date:</strong> <%= player.birthDate %></p>
+      <p class="player-rating"><strong>Player Work Rate:</strong> <%= player.playerWorkRate %></p>
+      <p class="player-rating"><strong>Weak Foot:</strong> <%= player.weakFoot %></p>
+      <p class="player-rating"><strong>Skill Moves:</strong> <%= player.skillMoves %></p>
+      <p class="player-rating"><strong>Value:</strong> <%= player.valueEuro %></p>
+      <p class="player-rating"><strong>Wage:</strong> <%= player.wageEuro %></p>
       <p class="player-rating"><strong>Overall Rating:</strong> <%= player.overallRating %></p>
       <p class="player-rating"><strong>Potential Rating:</strong> <%= player.potentialRating %></p>
       <p class="player-positions"><strong>Preferred Positions:</strong> <%= player.preferredPositions.join(', ') %></p>
