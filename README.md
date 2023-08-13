@@ -6,7 +6,7 @@ Have a look on the demo hosteed by Heroku : https://football-stats-aad43eba93ec.
 
 To use the source code download the zip then run in your teminal:
 
-$ npm i
-$ npm run dev
+- npm i
+- npm run dev
 
 it should start on:  http://localhost:3000
