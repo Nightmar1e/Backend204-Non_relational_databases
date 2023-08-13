@@ -10,7 +10,6 @@ body {
     justify-content: center;
     align-items: center;
     max-width: 800px;
-    /* min-height: 100vh; */
     margin: 0 auto;
     padding: 20px;
     background-color: #1c3652;
@@ -20,7 +19,7 @@ body {
   
   .player-card {
     display: grid;
-    grid-template-columns: 1fr 300px; /* Adjust the width of the aside as needed */
+    grid-template-columns: 1fr 30%; 
     max-width: 1200px;
     width: 100%;
     background-color: #122336;
@@ -42,17 +41,21 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px; /* Adjust the gap between images as needed */
-    padding: 20px; /* Add padding as needed */
+    gap: 10px;
+    padding: 20px;
     text-align: center;
+    background-color: #1c3652;
+    border-top-right-radius: 35px;
+    border-bottom-right-radius: 35px;
   }
   
-  aside img{
+  aside img {
     display: block;
     max-width: auto;
     height: 120px;
   }
   
+    
   h1 {
     font-size: 28px;
     margin-bottom: 20px;
@@ -104,11 +107,7 @@ body {
     .player-profile {
       flex-direction: column;
       align-items: center;
-    }
-  
-    .player-details,
-    aside {
-      width: 100%;
+      padding: 10px;
     }
   
     h1 {
