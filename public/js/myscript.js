@@ -39,7 +39,6 @@ const applyFilters = () => {
     return input.trim().toLowerCase();
   }
 
-  // Example usage:
   const playerNameFilter = cleanFilterValue(filterInput.value);
   const positionFilter = cleanFilterValue(filterPositionInput.value);
   const nationalityFilter = cleanFilterValue(filterNationalityInput.value);
@@ -86,10 +85,8 @@ const fetchPlayers = async (page) => {
     playerList.innerHTML = '';
 
     players.forEach(player => {
-      // Instead of creating new elements, we can directly select the existing ones
       const playerRow = playerList.insertRow();
 
-      // No need to create new cells, as they are already defined in the HTML structure
       const nameCell = playerRow.insertCell();
       const nationalityCell = playerRow.insertCell();
       const overallRatingCell = playerRow.insertCell();
@@ -98,7 +95,6 @@ const fetchPlayers = async (page) => {
       const ageCell = playerRow.insertCell();
       const teamCell = playerRow.insertCell();
 
-      // Use the existing class names from your HTML
       nameCell.className = 'name';
       nationalityCell.className = 'nationality';
       overallRatingCell.className = 'OverallRating';
@@ -107,7 +103,6 @@ const fetchPlayers = async (page) => {
       ageCell.className = 'age';
       teamCell.className = 'team';
 
-      // Populate the cells with content from the player object
       nameCell.innerHTML = `<a href="/player/${player.playerId}">${player.name}</a>`;
       nationalityCell.innerHTML = `<img src="${player.nationalityImg}" alt="${player.nationality}" width="40px" height="40px">`;
       overallRatingCell.textContent = player.overallRating;
@@ -123,52 +118,22 @@ const fetchPlayers = async (page) => {
   }
 };
 
+const prevButton = document.getElementById('prev-page');
+const nextButton = document.getElementById('next-page');
 
-  const updatePaginationButtons = () => {
-    const paginationContainer = document.querySelector('.pagination');
-    paginationContainer.innerHTML = ''; 
-// remove the creation of html classes from js, an dmake it in html
-    const prevButton = document.createElement('button');
-    prevButton.textContent = 'Previous Page';
-    prevButton.classList.add('pagination-button', 'prev-button'); 
-    prevButton.addEventListener('click', () => {
-      if (currentPage > 1) {
-        fetchPlayers(currentPage - 1);
-      }
-    });
-    paginationContainer.appendChild(prevButton);
-    
-// fix again the number of the players ()
+prevButton.addEventListener('click', () => {
+  if (currentPage > 1) {
+    fetchPlayers(currentPage - 1);
+  }
+});
+nextButton.addEventListener('click', () => {
+  if (currentPage < totalPages) {
+    fetchPlayers(currentPage + 1);
+  }
+});
 
-    // Calculate the range of page numbers to display
-    // const minPage = Math.max(currentPage - 2, 1);
-    // const maxPage = Math.min(currentPage + 2, totalPages);
-  
-    // for (let page = minPage; page <= maxPage; page++) {
-    //   const button = document.createElement('button');
-    //   button.textContent = page;
-    //   button.classList.add('pagination-button');
-      
-    //   if (page === currentPage) {
-    //     button.classList.add('active'); // Add a class to highlight the active page
-    //   }
-  
-    //   button.addEventListener('click', () => fetchPlayers(page));
-    //   paginationContainer.appendChild(button);
-    // }
-  
-    const nextButton = document.createElement('button');
-    nextButton.textContent = 'Next Page';
-    nextButton.classList.add('pagination-button', 'next-button');
-    nextButton.addEventListener('click', () => {
-      if (currentPage < totalPages) {
-        fetchPlayers(currentPage + 1);
-      }
-    });
-    paginationContainer.appendChild(nextButton);
-    };
+
 fetchPlayers(currentPage);
-updatePaginationButtons();
 });
 
 console.log('Script loaded')
