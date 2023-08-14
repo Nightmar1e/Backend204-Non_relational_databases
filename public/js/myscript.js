@@ -31,14 +31,19 @@ const filterInput = document.getElementById('filter-input');
 const filterPositionInput = document.getElementById('filter-position-input');
 const filterNationalityInput = document.getElementById('filter-nationality-input');
 const filterTeamInput = document.getElementById('filter-team-input');
-
+//  make the user select the positions and not type it
 const applyFilters = () => {
   console.log("Applying filters...");
+//  make this in a function .trim().toLowerCase();
+  function cleanFilterValue(input) {
+    return input.trim().toLowerCase();
+  }
 
-  const playerNameFilter = filterInput.value.trim().toLowerCase();
-  const positionFilter = filterPositionInput.value.trim().toLowerCase();
-  const nationalityFilter = filterNationalityInput.value.trim().toLowerCase();
-  const teamFilter = filterTeamInput.value.trim().toLowerCase();
+  // Example usage:
+  const playerNameFilter = cleanFilterValue(filterInput.value);
+  const positionFilter = cleanFilterValue(filterPositionInput.value);
+  const nationalityFilter = cleanFilterValue(filterNationalityInput.value);
+  const teamFilter = cleanFilterValue(filterTeamInput.value);
 
   const filteredProfiles = Array.from(playerProfiles).filter(profile => {
     const playerName = profile.querySelector('.name').textContent.toLowerCase();
@@ -69,67 +74,47 @@ const playersPerPage = 25;
 const totalPlayers = playerProfiles.length;
 const totalPages = Math.ceil(totalPlayers / playersPerPage);
 
+
+//  reconsttruire le fetch (or any function) en petites functions
+//  try to teest functions (how to test functions)
 const fetchPlayers = async (page) => {
   try {
     const response = await fetch(`/api/players?page=${page}`);
     const players = await response.json();
 
     const playerList = document.querySelector('.player-list');
-    playerList.innerHTML = ''; 
+    playerList.innerHTML = '';
 
     players.forEach(player => {
-      const playerRow = document.createElement('tr');
-      playerRow.classList.add('player-details');
+      // Instead of creating new elements, we can directly select the existing ones
+      const playerRow = playerList.insertRow();
 
-      const nameCell = document.createElement('td');
-      nameCell.classList.add('name');
+      // No need to create new cells, as they are already defined in the HTML structure
+      const nameCell = playerRow.insertCell();
+      const nationalityCell = playerRow.insertCell();
+      const overallRatingCell = playerRow.insertCell();
+      const potentialRatingCell = playerRow.insertCell();
+      const positionCell = playerRow.insertCell();
+      const ageCell = playerRow.insertCell();
+      const teamCell = playerRow.insertCell();
 
-      const nameLink = document.createElement('a');
-      nameLink.href = `/player/${player.playerId}`; 
-      nameLink.textContent = player.name;
-      
-      const nationalityCell = document.createElement('td');
-      const nationalityImage = document.createElement('img');
-      nationalityImage.src = `${player.nationalityImg}`;
-      nationalityImage.alt = player.nationality;
-      nationalityImage.className = 'nation size-2';
-      nationalityImage.setAttribute('data-original-src', player.nationality);
-    
-    
-      const overallRatingCell = document.createElement('td');
+      // Use the existing class names from your HTML
+      nameCell.className = 'name';
+      nationalityCell.className = 'nationality';
+      overallRatingCell.className = 'OverallRating';
+      potentialRatingCell.className = 'PotentialRating';
+      positionCell.className = 'position';
+      ageCell.className = 'age';
+      teamCell.className = 'team';
+
+      // Populate the cells with content from the player object
+      nameCell.innerHTML = `<a href="/player/${player.playerId}">${player.name}</a>`;
+      nationalityCell.innerHTML = `<img src="${player.nationalityImg}" alt="${player.nationality}" width="40px" height="40px">`;
       overallRatingCell.textContent = player.overallRating;
-
-      const potentialRatingCell = document.createElement('td');
       potentialRatingCell.textContent = player.potentialRating;
-
-      const positionCell = document.createElement('td');
       positionCell.textContent = player.preferredPositions.join(', ');
-
-      const ageCell = document.createElement('td');
       ageCell.textContent = player.age;
-      
-
-      const teamCell = document.createElement('td');
-
-      const teamCellImg = document.createElement('img');
-      teamCellImg.src = `${player.teamImg}`;
-      teamCellImg.alt = player.team;
-      teamCellImg.className = 'team size-1';
-      teamCellImg.setAttribute('data-original-src', player.team);
-
-      playerRow.appendChild(nameCell);
-      playerRow.appendChild(nationalityCell);
-      nationalityCell.appendChild(nationalityImage);
-
-      playerRow.appendChild(overallRatingCell);
-      playerRow.appendChild(potentialRatingCell);
-      playerRow.appendChild(positionCell);
-      playerRow.appendChild(ageCell);
-      playerRow.appendChild(teamCell);
-      teamCell.appendChild(teamCellImg);
-      nameCell.appendChild(nameLink);
-
-      playerList.appendChild(playerRow);
+      teamCell.innerHTML = `<img src="${player.teamImg}" alt="${player.team}" width="40px" height="40px">`;
     });
 
     currentPage = page;
@@ -138,10 +123,11 @@ const fetchPlayers = async (page) => {
   }
 };
 
+
   const updatePaginationButtons = () => {
     const paginationContainer = document.querySelector('.pagination');
     paginationContainer.innerHTML = ''; 
-
+// remove the creation of html classes from js, an dmake it in html
     const prevButton = document.createElement('button');
     prevButton.textContent = 'Previous Page';
     prevButton.classList.add('pagination-button', 'prev-button'); 
@@ -152,6 +138,8 @@ const fetchPlayers = async (page) => {
     });
     paginationContainer.appendChild(prevButton);
     
+// fix again the number of the players ()
+
     // Calculate the range of page numbers to display
     // const minPage = Math.max(currentPage - 2, 1);
     // const maxPage = Math.min(currentPage + 2, totalPages);
