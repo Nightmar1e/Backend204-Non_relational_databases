@@ -61,9 +61,7 @@ async function scrapePlayersData(url, pagesLeft) {
         const age = parseInt($(this).find('[data-title="Age"]').text().trim(), 10);
         const team = $(this).find('img.team').attr('alt').replace(" FIFA 23", "");
         const teamImg = $(this).find('.link-team img').attr('src');
-
         const playerDetailUrl = `https://www.fifaindex.com/player/${playerId}/${name.toLowerCase().replace(/\s/g, '-')}/fifa23/`;
-
 
         playersData.push({
           playerId,

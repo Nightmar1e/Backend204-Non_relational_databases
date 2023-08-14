@@ -7,7 +7,6 @@ router.get('/players', async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const perPage = 20;
     const skip = (page - 1) * perPage;
-
     const players = await Player.find({}).skip(skip).limit(perPage);
     res.json(players);
   } catch (err) {
@@ -25,10 +24,4 @@ router.get('/players-profile', async (req, res) => {
     res.status(500).send('<h1>Server error, Add your IP in the DB</h1>');
   }
 });
-
-
-
-
-
-
 module.exports = router;
