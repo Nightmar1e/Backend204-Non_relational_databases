@@ -24,4 +24,5 @@ router.get('/players-profile', async (req, res) => {
     res.status(500).send('<h1>Server error, Add your IP in the DB</h1>');
   }
 });
+
 module.exports = router;

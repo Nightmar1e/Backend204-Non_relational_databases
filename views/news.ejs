@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News</title>
+</head>
+<body>
+    <h1>Welcome to the News Page</h1>
+  
+
+
+</body>
+</html>
+
+
+<!-- remove this functtion from index.js forr now -->
+<!-- async function fetchHeadlinesFromDatabase() {
+    const connectionString = "mongodb+srv://walid:Walidd_1@cluster00.xmzizuz.mongodb.net/fifa";
+    const settings = {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    };
+  
+    const client = new MongoClient(connectionString, settings);
+  
+    try {
+      await client.connect();
+  
+      const db = client.db("fifa");
+      const collection = db.collection("headlines");
+  
+      const headlines = await collection.find({}, { projection: { headline: 1 } }).toArray();
+  
+      return headlines;
+    } finally {
+      client.close();
+    }
+  
+  } -->
+  

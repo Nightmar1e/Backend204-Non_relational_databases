@@ -21,6 +21,9 @@ async function connectToDatabase() {
 
 app.set('view-engine', 'ejs');
 
+// Set the cache control headers for static assets
+// app.use(express.static(path.join(__dirname, 'public'), { maxAge: '1d' }));
+
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.static(path.join(__dirname, 'public')));  
@@ -65,6 +68,48 @@ app.get('/players-profile', async (req, res) => {
     res.status(500).send('<h1>Server error, Add your IP in the DB</h1>');
   }
 });
+app.get('/news', async (req, res) => {
+  try {
+    const headlines = await fetchHeadlinesFromDatabase(); // Fetch headlines directly from the collection
+    res.render('news.ejs', { headlines });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
+});
+app.get('/games', (req, res) => {
+  // You can add any necessary logic here before rendering the template
+  try{
+    res.render('games.ejs');
+    }catch(err){
+      console.error(err);
+      res.status(500).send('Server error');
+}});
+
+async function fetchHeadlinesFromDatabase() {
+  const connectionString = "mongodb+srv://walid:Walidd_1@cluster00.xmzizuz.mongodb.net/fifa";
+  const settings = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  };
+
+  const client = new MongoClient(connectionString, settings);
+
+  try {
+    await client.connect();
+
+    const db = client.db("fifa");
+    const collection = db.collection("headlines");
+
+    const headlines = await collection.find({}, { projection: { headline: 1 } }).toArray();
+
+    return headlines;
+  } finally {
+    client.close();
+  }
+
+}
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log('http://localhost:3000'));
