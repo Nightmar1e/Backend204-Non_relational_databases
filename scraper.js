@@ -35,6 +35,8 @@ const playerSchema = new mongoose.Schema({
   wageEuro: String,
   wageDollar: String,
   wagePound: String,
+  playerStatsHeader: { type: String, maxlength: 1000,},
+  playerStatsText: { type: String, maxlength: 5000,},
 });
 
 const Player = mongoose.model("Player", playerSchema, "players"); 
@@ -98,11 +100,14 @@ for (const playerInfo of playersData) {
         const weakFoot = $detail('p:contains("Weak Foot") .star .fas.fa-star').length;
         const skillMoves = $detail('p:contains("Skill Moves") .star .fas.fa-star').length;
         const valueEuro = $detail('p.data-currency-euro:contains("Value") .float-right').text();
-        const valueDollar = $detail('p.data-currency-dollar:contains("Value") .float-right').text();
-        const valuePound = $detail('p.data-currency-pound:contains("Value") .float-right').text();
         const wageEuro = $detail('p.data-currency-euro:contains("Wage") .float-right').text();
-        const wageDollar = $detail('p.data-currency-dollar:contains("Wage") .float-right').text();
-        const wagePound = $detail('p.data-currency-pound:contains("Wage") .float-right').text();
+        // Extract player stats HTML
+        const playerStatsHtml = detailResponse.data;
+        const $playerStats = cheerio.load(playerStatsHtml);
+
+        // Extract player stats
+        const playerStatsHeader = $playerStats('.card-header').text().trim();
+        const playerStatsText = $playerStats('.card-body p').text().trim();
 
         await Player.updateOne({ playerId: playerInfo.playerId }, {
             $set: {
@@ -116,11 +121,9 @@ for (const playerInfo of playersData) {
                 weakFoot,
                 skillMoves,
                 valueEuro,
-                valueDollar,
-                valuePound,
                 wageEuro,
-                wageDollar,
-                wagePound,
+                playerStatsHeader: playerStatsHeader,
+                playerStatsText: playerStatsText,    
             }
         });
     } catch (error) {
@@ -140,7 +143,7 @@ for (const playerInfo of playersData) {
   }
 }
 
-const totalPagesToScrape = 30;
+const totalPagesToScrape = 3;
 const url = "https://www.fifaindex.com/players/";
 
 (async () => {

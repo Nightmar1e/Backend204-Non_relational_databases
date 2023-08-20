@@ -25,7 +25,10 @@
         <p class="player-rating"><strong>Potential Rating:</strong> <%= player.potentialRating %></p>
         <p class="player-positions"><strong>Preferred Positions:</strong> <%= player.preferredPositions.join(', ') %></p>
         <p class="player-age"><strong>Age:</strong> <%= player.age %></p>
-      </section>
+        <p class="player-rating">
+          <strong><%= player.playerStatsHeader %> Stats:</strong> <%= player.playerStatsText %>
+        </p>
+              </section>
       <aside>
           <img src="<%= player.playerImg %>" alt="<%= player.name %>">
           <img src="<%= player.teamImg %>" alt="<%= player.team %>">

@@ -77,6 +77,7 @@ const totalPages = Math.ceil(totalPlayers / playersPerPage);
 //  reconsttruire le fetch (or any function) en petites functions
 //  try to teest functions (how to test functions)
 const fetchPlayers = async (page) => {
+  console.log(`Fetching players for page ${page}`);
   try {
     const response = await fetch(`/api/players?page=${page}`);
     const players = await response.json();
@@ -118,20 +119,52 @@ const fetchPlayers = async (page) => {
   }
 };
 
-const prevButton = document.getElementById('prev-page');
-const nextButton = document.getElementById('next-page');
+  const prevButton = document.getElementById('prev-page');
+  const nextButton = document.getElementById('next-page');
+  const firstButton = document.getElementById('first-page');
+  const lastButton = document.getElementById('last-page');
 
-prevButton.addEventListener('click', () => {
-  if (currentPage > 1) {
-    fetchPlayers(currentPage - 1);
-  }
-});
-nextButton.addEventListener('click', () => {
-  if (currentPage < totalPages) {
-    fetchPlayers(currentPage + 1);
-  }
-});
+  prevButton.addEventListener('click', () => {
+    if (currentPage > 1) {
+      fetchPlayers(currentPage - 1);      console.log("Last button clicked");
+    }
+  });
 
+  nextButton.addEventListener('click', () => {
+    if (currentPage < totalPages) {
+      fetchPlayers(currentPage + 1);
+    }
+  });
+
+  firstButton.addEventListener('click', () => {
+    console.log("First button clicked");
+    fetchPlayers(1);
+  });
+  
+  lastButton.addEventListener('click', () => {
+    fetchPlayers(totalPages);
+  });
+// Update button visibility on page load
+
+// Function to update button visibility
+function updateButtonVisibility() {
+  if (currentPage === 1) {
+    prevButton.style.display = 'none';
+    firstButton.style.display = 'none';
+  } else {
+    prevButton.style.display = 'block';
+    firstButton.style.display = 'block';
+  }
+
+  if (currentPage === totalPages) {
+    nextButton.style.display = 'none';
+    lastButton.style.display = 'none';
+  } else {
+    nextButton.style.display = 'block';
+    lastButton.style.display = 'block';
+  }
+}
+updateButtonVisibility();
 
 fetchPlayers(currentPage);
 });
